@@ -82,7 +82,7 @@ class UsersList extends React.Component {
                 <div style={styles.header}>
                     <label style={styles.headerText}> List of Users </label>
 
-                    <FloatingActionButton title="ADD NEW USER" secondary={true} style={{ marginRight: '10px' }} onTouchTap={this.onOpenNewUserDialog.bind(this)}>
+                    <FloatingActionButton title="ADD NEW USERHAHAHA" secondary={true} style={{ marginRight: '10px' }} onTouchTap={this.onOpenNewUserDialog.bind(this)}>
                         <ContentAdd />
                     </FloatingActionButton>
 
