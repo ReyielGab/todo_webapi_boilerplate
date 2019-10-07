@@ -1,10 +1,6 @@
 
-import axios from 'axios'
 import moment from 'moment';
-
-var boilerAxios = axios.create({
-    baseURL: 'http://localhost:2940/'
-})
+import client from '../../../api.js';
 
 import Notifications from 'react-notification-system-redux';
 
@@ -37,18 +33,21 @@ const convertTodoDateUtcToLocal = t => {
 };
 
 export default (state = {
-    todoList: []
+    todoList: [],
+    getAllTodosPendingRequest: false
 }, action) => {
     switch (action.type) {
 
         case GET_ALL_TODO_BY_ID_REQUEST:
             return state = {
                 ...state,
+                getAllTodosPendingRequest: true
             }
 
         case GET_ALL_TODO_BY_ID_SUCCESS:
             return state = {
                 ...state,
+                getAllTodosPendingRequest: false,
                 todoList: action.payload.map(convertTodoDateUtcToLocal)
             }
 
@@ -96,7 +95,7 @@ const getAllTodoByIdRequest = () => ({
     type: GET_ALL_TODO_BY_ID_REQUEST
 });
 
-const getAllTOdoByIdSuccess = (todos) => ({
+const getAllTodoByIdSuccess = (todos) => ({
     type: GET_ALL_TODO_BY_ID_SUCCESS,
     payload: todos
 });
@@ -133,10 +132,10 @@ const doneSelectedTodoError = () => ({
 
 
 export const getAllTodos = (userId) => (dispatch) => {
-
-    boilerAxios.get(`api/Todo/GetTodosById?UserId=${userId}`)
+    dispatch(getAllTodoByIdRequest())
+    client.get(`api/Todo/GetTodosById?UserId=${userId}`)
         .then(response => {
-            dispatch(getAllTOdoByIdSuccess(response.data))
+            dispatch(getAllTodoByIdSuccess(response.data))
             
         })
         .catch(error => {
@@ -147,7 +146,7 @@ export const getAllTodos = (userId) => (dispatch) => {
 
 export const deleteSelectedTodo = (todoId, closeDialog) => (dispatch) => {
 
-    boilerAxios.delete(`api/Todo/DeleteTodoById?TodoId=${todoId}`)
+    client.delete(`api/Todo/DeleteTodoById?TodoId=${todoId}`)
         .then(response => {
             
             dispatch(Notifications.success({
@@ -167,7 +166,7 @@ export const deleteSelectedTodo = (todoId, closeDialog) => (dispatch) => {
 
 export const doneTodo = (todoId) => (dispatch) => {
     
-    boilerAxios.put(`api/Todo/DoneTodo?TodoId=${todoId}`)
+    client.put(`api/Todo/DoneTodo?TodoId=${todoId}`)
         .then(response => {
 
             dispatch(Notifications.success({

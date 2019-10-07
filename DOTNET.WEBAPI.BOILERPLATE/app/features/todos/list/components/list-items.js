@@ -21,7 +21,6 @@ const styles = {
 class TodoListItem extends React.Component {
     constructor(props) {
         super(props);
-        const { todo } = this.props;
     }
 
     render() {
@@ -29,7 +28,7 @@ class TodoListItem extends React.Component {
         return (
 
             <TableRow hoverable={true}>
-                <TableRowColumn> {todo.id}  </TableRowColumn>
+                {/* <TableRowColumn> {todo.id}  </TableRowColumn> */}
 
                 <TableRowColumn> {todo.todos}  </TableRowColumn>
 
@@ -38,7 +37,7 @@ class TodoListItem extends React.Component {
                 <TableRowColumn>
                     {todo.done ? 
                     <Avatar
-                        size="23"
+                        size={23}
                         round={true}
                         src={doneImg}
                         title={'Done'}
@@ -67,11 +66,14 @@ class TodoListItem extends React.Component {
                             onClick={openTodosDeleteDialog.bind(this, todo)}
                         />
 
-                        <MenuItem
-                            leftIcon={<DoneIcon />}
-                            primaryText="Done"
-                            onClick={doneTodo.bind(this, todo.id)}
-                        />
+                        {
+                            !todo.done ?  <MenuItem
+                              leftIcon={<DoneIcon />}
+                              primaryText="Done"
+                              onClick={doneTodo.bind(this, todo.id)}
+                          /> : null
+                        }
+                      
 
 
                     </IconMenu>

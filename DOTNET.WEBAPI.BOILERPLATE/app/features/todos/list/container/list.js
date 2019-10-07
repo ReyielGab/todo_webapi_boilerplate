@@ -42,7 +42,7 @@ class TodoListContainer extends React.Component {
     }
 
     render() {
-        const { params, todoList, actions: { deleteSelectedTodo, doneTodo } } = this.props;
+        const { params, todoList, getAllTodosPendingRequest, actions: { deleteSelectedTodo, doneTodo } } = this.props;
         return (
             <StyleRoot>
                 <div>
@@ -51,7 +51,8 @@ class TodoListContainer extends React.Component {
                         params={params}
                         todoList={todoList}
                         deleteSelectedTodo={deleteSelectedTodo}
-                        doneTodo={doneTodo} />
+                        doneTodo={doneTodo}
+                        getAllTodosPendingRequest={getAllTodosPendingRequest} />
 
 
                 </div>

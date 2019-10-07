@@ -29,13 +29,15 @@ class UsersListContainer extends React.Component {
     }
 
     render() {
-        const { usersList, userListRequestPending } = this.props;
+        const { usersList, userListRequestPending, actions: { deleteSelectedUser } } = this.props;
         return (
             <StyleRoot>
                 <div style={{marginTop: '36px'}}>                    
                                
                     <UsersList
                         usersList={usersList}
+                        deleteSelectedUser={deleteSelectedUser}
+                        userListRequestPending={userListRequestPending}
                     />
                     
                 </div>

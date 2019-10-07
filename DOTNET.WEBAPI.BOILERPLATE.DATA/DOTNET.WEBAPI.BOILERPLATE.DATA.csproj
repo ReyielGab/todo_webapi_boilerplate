@@ -92,6 +92,7 @@
     <Compile Include="Context\BoilerDBContext.cs" />
     <Compile Include="CQRS\BoilerMediator.cs" />
     <Compile Include="CQRS\Commands\DeleteTodoByIdCommand.cs" />
+    <Compile Include="CQRS\Commands\DeleteUserByIdCommand.cs" />
     <Compile Include="CQRS\Commands\DoneTodoCommand.cs" />
     <Compile Include="CQRS\Commands\EditUserCommand.cs" />
     <Compile Include="CQRS\Commands\NewTodoCommand.cs" />

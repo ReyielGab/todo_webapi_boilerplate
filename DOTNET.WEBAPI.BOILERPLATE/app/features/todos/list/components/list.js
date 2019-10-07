@@ -9,6 +9,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'mate
 import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import colorPallete from '../../../../util/styles/color-pallete';
 
@@ -119,7 +120,7 @@ class TodoList extends React.Component {
     }
 
     render() {
-        const { params, todoList } = this.props;
+        const { params, todoList, getAllTodosPendingRequest } = this.props;
         return (
             <StyleRoot>
             
@@ -140,13 +141,13 @@ class TodoList extends React.Component {
                                              title="NO TO DO'S YET"
                                              subtitle="Click + to add to do's"
                                         />
-                                        :
+                                        : getAllTodosPendingRequest ? <div style={styles.loadingStyle}> <CircularProgress size={80} thickness={5} /> </div> :
                 <Table>
                     <TableHeader
                         adjustForCheckbox={false}
                         displaySelectAll={false}>
                         <TableRow>
-                            <TableHeaderColumn>ID</TableHeaderColumn>
+                            {/* <TableHeaderColumn>ID</TableHeaderColumn> */}
                             <TableHeaderColumn>TO DO</TableHeaderColumn>
                             <TableHeaderColumn>DATE</TableHeaderColumn>
                             <TableHeaderColumn>DONE</TableHeaderColumn>
@@ -158,7 +159,7 @@ class TodoList extends React.Component {
                     <TableBody
                         showRowHover={true}
                         displayRowCheckbox={false}>
-                        
+                         
                         {this.onDisplayOfTodos()}
 
                     </TableBody>

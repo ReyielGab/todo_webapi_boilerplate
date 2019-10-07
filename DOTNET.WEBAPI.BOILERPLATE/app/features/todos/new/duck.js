@@ -1,6 +1,5 @@
-import axios from 'axios'
 import moment from 'moment';
-
+import client from '../../../api.js';
 import Notifications from 'react-notification-system-redux';
 
 const notificationOpts = {
@@ -10,9 +9,6 @@ const notificationOpts = {
     autoDismiss: 6
 };
 
-var boilerAxios = axios.create({
-    baseURL: 'http://localhost:2940/'
-})
 
 const ADD_NEW_TODO_REQUEST = 'ADD_NEW_TODO_REQUEST';
 const ADD_NEW_TODO_SUCCESS = 'ADD_NEW_TODO_SUCCESS';
@@ -60,7 +56,7 @@ const addNewTodoError = () => ({
 export function addNewTodo(value, closeDialog) {
     return(dispatch) => {
         
-        boilerAxios
+        client
             .post('/api/Todo/NewTodo', value)
             .then(response => {
                 dispatch(Notifications.success({

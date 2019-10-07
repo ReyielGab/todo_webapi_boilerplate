@@ -52,5 +52,15 @@ namespace DOTNET.WEBAPI.BOILERPLATE.Controllers
             return Ok(response.Data);
         }
 
+        [HttpDelete]
+        [Route("DeleteUser")]
+        [ResponseType(typeof(UserDto))]
+        public IHttpActionResult DeleteUser([FromUri] DeleteUserByIdCommand command)
+        {
+            var response = _mediator.Request(command);
+
+            return Ok(response.Data);
+        }
+
     }
 }

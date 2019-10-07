@@ -35,17 +35,24 @@ class UserListItem extends React.Component {
         browserHistory.push(`/view-todos/${user.id}`)
     }
 
+    todosLeft(userTodos) {
+        return userTodos.filter((todos) => {
+           return !todos.done
+        }).length
+    }
+
     render() {
-        const { user, openEditUserDialog } = this.props;
-        console.log(user, 'hehe');
+        const { user, openEditUserDialog, openDeleteUserDialog } = this.props;
         return (
 
                 <TableRow hoverable={true}>
-                    <TableRowColumn> {user.id}  </TableRowColumn>
+                    {/* <TableRowColumn> {user.id}  </TableRowColumn> */}
 
                     <TableRowColumn> {user.firstname} {user.middlename} {user.lastname}  </TableRowColumn>
 
                     <TableRowColumn> {user.age}  </TableRowColumn>
+
+                    <TableRowColumn> {this.todosLeft(user.todos)}  </TableRowColumn>
 
                     <TableRowColumn style={styles.actionWrapper}>
                         <IconMenu
@@ -67,6 +74,12 @@ class UserListItem extends React.Component {
                                 leftIcon={<EditIcon />}
                                 primaryText="Edit"
                                 onClick={openEditUserDialog.bind(this, user)}
+                            />
+
+                             <MenuItem
+                                leftIcon={<DeleteIcon />}
+                                primaryText="Delete"
+                                onClick={openDeleteUserDialog.bind(this, user)}
                             />
                             
 

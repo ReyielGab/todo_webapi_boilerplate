@@ -1,9 +1,4 @@
-import axios from 'axios'
-
-var boilerAxios = axios.create({
-    baseURL: 'http://localhost:2940/'
-});
-
+import client from '../../../api.js';
 import Notifications from 'react-notification-system-redux';
 
 const notificationOpts = {
